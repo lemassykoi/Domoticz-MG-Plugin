@@ -372,8 +372,10 @@ def update_devices(vehicle_data):
         # --- Update Devices ---
         # Check if car is sleeping to avoid updating SoC with invalid 0% values
         car_sleeping = False
-        if bvs and hasattr(bvs, 'extendedData1'):
-            car_sleeping = bvs.extendedData1 == -128
+        if vehicle_status and hasattr(vehicle_status, 'basicVehicleStatus'):
+            bvs = vehicle_status.basicVehicleStatus
+            if hasattr(bvs, 'extendedData1'):
+                car_sleeping = bvs.extendedData1 == -128
         
         if 1 in Devices: 
             # Skip battery level updates when car is sleeping or SoC is 0/invalid
