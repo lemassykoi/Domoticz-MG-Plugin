@@ -393,7 +393,7 @@ def update_devices(vehicle_data):
         
         # Charge Limit Selector
         if 8 in Devices and charging_status and not car_sleeping:
-            code_to_selector = {1: 0, 2: 10, 3: 20, 4: 30, 5: 40, 6: 50, 7: 60}
+            code_to_selector = {0: 0, 1: 40, 2: 50, 3: 60, 4: 70, 5: 80, 6: 90, 7: 100}
             limit_code = getattr(charging_status.chrgMgmtData, 'bmsOnBdChrgTrgtSOCDspCmd', None)
             if limit_code in code_to_selector:
                 Devices[8].Update(nValue=code_to_selector[limit_code], sValue=str(code_to_selector[limit_code]))
