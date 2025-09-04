@@ -52,7 +52,7 @@ A Domoticz plugin for MG iSmart vehicles (MG5, MG4, ZS EV, Marvel R, etc.) that 
 - **Password**: Your MG iSmart account password  
 - **Region**: Select "Europe" for EU users, "Australia/New Zealand" for AU/NZ users, or "Auto" for automatic detection
 - **Update Interval**: How often to poll the API (default: 180 seconds, minimum recommended: 300 seconds for production)
-- **Home Radius**: Detection radius for "at home" status (default: 100 meters)
+- **Home Radius**: Detection radius for "at home" status (default: 25 meters)
 - **Domoticz Port**: Port number for Domoticz API (default: 8080)
 - **Debug Level**: Normal/Debug/Verbose logging levels
 
