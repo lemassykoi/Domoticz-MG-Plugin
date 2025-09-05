@@ -34,10 +34,14 @@ A Domoticz plugin for MG iSmart vehicles (MG5, MG4, ZS EV, Marvel R, etc.) that 
 
 2. **Copy the plugin to Domoticz:**
    ```bash
-   sudo cp -r domoticz_plugin /opt/domoticz/plugins/saic-ismart/
+   cd /home/pi/domoticz/plugins
+   git clone https://github.com/lemassykoi/Domoticz-MG-Plugin.git
    ```
 
 3. **Restart Domoticz**
+   ```bash
+   sudo systemctl restart domoticz
+   ```
 
 4. **Add Hardware:**
    - Go to Setup -> Hardware
