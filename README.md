@@ -167,3 +167,8 @@ Enable Debug or Verbose mode to see:
 - Data validation details
 - Sleep mode detection
 - Power calculations
+
+
+## Preview
+
+<img src="MG_plugin_screenshot.png">
