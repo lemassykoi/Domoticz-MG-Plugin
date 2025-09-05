@@ -34,7 +34,7 @@ A Domoticz plugin for MG iSmart vehicles (MG5, MG4, ZS EV, Marvel R, etc.) that 
 
 2. **Copy the plugin to Domoticz:**
    ```bash
-   sudo cp -r domoticz_plugin /home/pi/domoticz/plugins/saic-ismart/
+   sudo cp -r domoticz_plugin /opt/domoticz/plugins/saic-ismart/
    ```
 
 3. **Restart Domoticz**
@@ -48,7 +48,7 @@ A Domoticz plugin for MG iSmart vehicles (MG5, MG4, ZS EV, Marvel R, etc.) that 
 
 ## Configuration
 
-- **Username**: Your MG iSmart account email address (authentication is not working with phone number)
+- **Username**: Your MG iSmart account email address
 - **Password**: Your MG iSmart account password  
 - **Region**: Select "Europe" for EU users, "Australia/New Zealand" for AU/NZ users, or "Auto" for automatic detection
 - **Update Interval**: How often to poll the API (default: 180 seconds, minimum recommended: 300 seconds for production)
@@ -56,9 +56,17 @@ A Domoticz plugin for MG iSmart vehicles (MG5, MG4, ZS EV, Marvel R, etc.) that 
 - **Domoticz Port**: Port number for Domoticz API (default: 8080)
 - **Debug Level**: Normal/Debug/Verbose logging levels
 
-NOTE: If you are using an account for iSMART App, you should create a secondary account, or your app will ask for authentication each time you launch it.
-You can create a secondary account by creating an iSMART account, with an other email address. Then, when the second account has been created, from your first account, go to Settings, and Tap Secondary account to invite the freshly created Account. No need to associate the car with the secondary account.
-When done, you can use the secondary account email and password in the plugin.
+### iSMART Account Recommendation
+
+**IMPORTANT**: If you are currently using the same account credentials in the official MG iSMART mobile app, you should create a dedicated secondary account for this plugin to avoid authentication conflicts. Using the same account simultaneously in both the app and the plugin will cause the mobile app to repeatedly request re-authentication.
+
+**How to create a secondary account:**
+1. Create a new MG iSMART account using a different email address
+2. From your primary account, go to Settings → Secondary Account
+3. Invite the newly created secondary account
+4. Use the secondary account credentials in this plugin
+
+**Note**: There's no need to associate the vehicle with the secondary account - it will inherit access through the invitation from your primary account.
 
 ## Devices Created
 
