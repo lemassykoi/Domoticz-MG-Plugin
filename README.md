@@ -56,6 +56,10 @@ A Domoticz plugin for MG iSmart vehicles (MG5, MG4, ZS EV, Marvel R, etc.) that 
 - **Domoticz Port**: Port number for Domoticz API (default: 8080)
 - **Debug Level**: Normal/Debug/Verbose logging levels
 
+NOTE: If you are using an account for iSMART App, you should create a secondary account, or your app will ask for authentication each time you launch it.
+You can create a secondary account by creating an iSMART account, with an other email address. Then, when the second account has been created, from your first account, go to Settings, and Tap Secondary account to invite the freshly created Account. No need to associate the car with the secondary account.
+When done, you can use the secondary account email and password in the plugin.
+
 ## Devices Created
 
 The plugin automatically creates these devices and organizes them in a `MG-XXXX` room plan:
