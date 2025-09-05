@@ -50,6 +50,8 @@ A Domoticz plugin for MG iSmart vehicles (MG5, MG4, ZS EV, Marvel R, etc.) that 
    - Select your region (Europe or Australia/New Zealand)
    - Set update interval (recommended: 300 seconds)
 
+<img width="760" height="783" alt="image" src="https://github.com/user-attachments/assets/46ad14d0-3de4-44c7-a195-c96755ec550b" />
+
 ## Configuration
 
 - **Username**: Your MG iSmart account email address
@@ -59,6 +61,13 @@ A Domoticz plugin for MG iSmart vehicles (MG5, MG4, ZS EV, Marvel R, etc.) that 
 - **Home Radius**: Detection radius for "at home" status (default: 25 meters)
 - **Domoticz Port**: Port number for Domoticz API (default: 8080)
 - **Debug Level**: Normal/Debug/Verbose logging levels
+
+**IMPORTANT**: Home detection is based on GPS coordinates in Domoticz settings. For the plugin to be able to access the coordinates, please fill in the appropriate settings. **Setup, Settings, SYSTEM tab**.
+
+**IMPORTANT**: For the Plugin to be able to create a room plan and assign devices to it, you need to provide the port to access your domoticz instance. Also be sure you set "127.0.0.1" as exception in Trusted Networks. **Setup, Settings, SECURITY tab**.
+
+<img width="418" height="82" alt="image" src="https://github.com/user-attachments/assets/2b2fac4b-f65e-4390-ba96-8dced224afbb" />
+
 
 ### iSMART Account Recommendation
 
