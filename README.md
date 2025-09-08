@@ -36,7 +36,7 @@ A comprehensive Domoticz plugin for MG (SAIC) electric and hybrid vehicles that 
 - **Speed**: Current vehicle speed monitoring
 
 ### 🛞 Advanced Sensors
-- **Tire Pressure**: All four tires with automatic PSI/bar conversion
+- **Tire Pressure**: All four tires with automatic PSI/bar conversion (work in progress)
 - **Temperature**: Interior and exterior temperature sensors
 - **Heated Seats**: Control for front left/right seat heating
 - **Range**: Current driving range estimation
@@ -59,13 +59,13 @@ A comprehensive Domoticz plugin for MG (SAIC) electric and hybrid vehicles that 
 ### System Requirements
 - **Domoticz** with Python plugin support enabled
 - **Python 3.9+**
-- **cryptography library** for token encryption (`pip install cryptography>=3.0.0`)
+- **cryptography library** for token encryption (`sudo pip install -U cryptography>=3.0.0 --break-system-packages`)
 - **Internet connection** for SAIC API access
 
 ### Account Requirements
 - **MG iSmart account** with valid credentials
 - **Vehicle registered** in the MG iSmart mobile app
-- **Region selection**: Europe (eu) or Australia/New Zealand (au)
+- **Region selection**: Europe (eu, default) or Australia/New Zealand (au)
 
 ## 🚀 Installation
 
