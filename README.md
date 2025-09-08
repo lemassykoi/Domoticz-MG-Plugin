@@ -77,8 +77,11 @@ git clone https://github.com/lemassykoi/Domoticz-MG-Plugin.git
 
 ### 2. Install Dependencies
 `sudo pip install saic-ismart-client-ng>=2.0.0 --break-system-packages`
+
 `sudo pip install -U requests>=2.25.0 --break-system-packages`
+
 `sudo pip install -U cryptography>=3.0.0 --break-system-packages`
+
 
 ### 3. Configure Plugin
 1. Go to **Setup** → **Hardware** in Domoticz
