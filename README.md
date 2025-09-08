@@ -67,6 +67,18 @@ A comprehensive Domoticz plugin for MG (SAIC) electric and hybrid vehicles that 
 - **Vehicle registered** in the MG iSmart mobile app
 - **Region selection**: Europe (eu, default) or Australia/New Zealand (au)
 
+### iSMART Account Recommendation
+
+**IMPORTANT**: If you are currently using the same account credentials in the official MG iSMART mobile app, you should create a dedicated secondary account for this plugin to avoid authentication conflicts. Using the same account simultaneously in both the app and the plugin will cause the mobile app to repeatedly request re-authentication.
+
+**How to create a secondary account:**
+1. Create a new MG iSMART account using a different email address
+2. From your primary account, go to Settings → Secondary Account
+3. Invite the newly created secondary account
+4. Use the secondary account credentials in this plugin
+
+**Note**: There's no need to associate the vehicle with the secondary account - it will inherit access through the invitation from your primary account.
+
 ## 🚀 Installation
 
 ### 1. Download Plugin
