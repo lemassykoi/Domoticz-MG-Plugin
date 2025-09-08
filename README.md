@@ -1,174 +1,235 @@
-# SAIC iSmart Domoticz Plugin
+# SAIC iSmart Plugin for Domoticz (MG Cars)
 
-A Domoticz plugin for MG iSmart vehicles (MG5, MG4, ZS EV, Marvel R, etc.) that connects directly to the SAIC API without requiring MQTT.
+A comprehensive Domoticz plugin for MG (SAIC) electric and hybrid vehicles that connects directly to the MG iSmart API without requiring MQTT or external dependencies.
 
-## Features
+## 🚗 Supported Vehicles
 
-- **Battery & Charging Monitoring**
-  - Battery level (SoC) display
-  - Current and maximum range tracking
-  - Real-time charging power monitoring
-  - Daily energy consumption tracking
-  - Time to full charge estimation
-  
-- **Vehicle Control**
-  - Start/stop charging control
-  - Charge limit setting (40-100% in 10% increments)
-  - Vehicle lock/unlock control
-  - Climate control (HVAC start/stop)
-  - Heated seat control (left/right, 4 levels)
-  
-- **Status Monitoring**
-  - Vehicle location with reverse geocoding
-  - Individual tyre pressure monitoring (4 wheels)
-  - 12V auxiliary battery voltage
-  - Vehicle speed display
-  - Charging cable connection status
+- **MG4** (Electric)
+- **MG5** (Electric) 
+- **MG ZS EV**
+- **MG Marvel R Electric**
+- **MG HS** (Plug-in Hybrid)
+- Other SAIC vehicles with iSmart connectivity
 
-## Installation
+## ✨ Features
 
-1. **Install the SAIC Python client library:**
-   ```bash
-   sudo pip3 install saic-ismart-client-ng
-   ```
+### 🔋 Battery & Charging
+- **Battery Level**: Real-time state of charge (SoC) monitoring
+- **Charging Status**: Active charging detection with power monitoring
+- **Charging Control**: Start/stop charging remotely
+- **Charge Limit Setting**: Set target SoC (40%, 50%, 60%, 70%, 80%, 90%, 100%)
+- **Time to Full**: Remaining charging time estimation
+- **Power Usage**: Daily power consumption tracking
+- **Charging Power**: Real-time charging power (kW) monitoring
 
-2. **Copy the plugin to Domoticz:**
-   ```bash
-   cd /home/pi/domoticz/plugins
-   git clone https://github.com/lemassykoi/Domoticz-MG-Plugin.git
-   ```
+### 🚙 Vehicle Status
+- **Lock Status**: Door lock/unlock detection and control
+- **Engine Status**: Engine on/off monitoring
+- **Hand Brake**: Parking brake status
+- **Climate Control**: Remote A/C start/stop
+- **12V Battery**: Auxiliary battery voltage monitoring
 
-3. **Restart Domoticz**
-   ```bash
-   sudo systemctl restart domoticz
-   ```
+### 📍 Location & Navigation  
+- **GPS Location**: Latitude/longitude coordinates
+- **Address**: Reverse geocoding to street address
+- **Home Detection**: Automatic home/away status based on GPS radius
+- **Speed**: Current vehicle speed monitoring
 
-4. **Add Hardware:**
-   - Go to Setup -> Hardware
-   - Select "SAIC iSmart (MG Cars)" from the Type dropdown
-   - Fill in your MG iSmart credentials
-   - Select your region (Europe or Australia/New Zealand)
-   - Set update interval (recommended: 300 seconds)
+### 🛞 Advanced Sensors
+- **Tire Pressure**: All four tires with automatic PSI/bar conversion
+- **Temperature**: Interior and exterior temperature sensors
+- **Heated Seats**: Control for front left/right seat heating
+- **Range**: Current driving range estimation
+- **Odometer**: Total vehicle mileage
 
-<img width="760" height="783" alt="image" src="https://github.com/user-attachments/assets/46ad14d0-3de4-44c7-a195-c96755ec550b" />
+### 🔔 Smart Notifications
+- **Charging Started**: Notification when charging begins
+- **Charging Complete**: Alert when target charge level reached
+- **Charging Stopped**: Notification when charging ends
 
-## Configuration
+### 🏠 Integration Features
+- **Room Plans**: Automatic creation and device organization
+- **Sleep Mode Detection**: Intelligent handling of vehicle sleep states
+- **Token Management**: Persistent authentication with disk storage (login once every ~4 months)
+- **Error Recovery**: Automatic retry with exponential backoff
+- **🌙 Night Cooldown**: Reduced polling (1 hour) when at home during night hours (22:30-07:30)
 
-- **Username**: Your MG iSmart account email address
-- **Password**: Your MG iSmart account password  
-- **Region**: Select "Europe" for EU users, "Australia/New Zealand" for AU/NZ users, or "Auto" for automatic detection
-- **Update Interval**: How often to poll the API (default: 180 seconds, minimum recommended: 300 seconds for production)
-- **Home Radius**: Detection radius for "at home" status (default: 25 meters)
-- **Domoticz Port**: Port number for Domoticz API (default: 8080)
-- **Debug Level**: Normal/Debug/Verbose logging levels
+## 📋 Requirements
 
-**IMPORTANT**: Home detection is based on GPS coordinates in Domoticz settings. For the plugin to be able to access the coordinates, please fill in the appropriate settings. **Setup, Settings, SYSTEM tab**.
+### System Requirements
+- **Domoticz** with Python plugin support enabled
+- **Python 3.9+**
+- **cryptography library** for token encryption (`pip install cryptography>=3.0.0`)
+- **Internet connection** for SAIC API access
 
-**IMPORTANT**: For the Plugin to be able to create a room plan and assign devices to it, you need to provide the port to access your domoticz instance. Also be sure you set "127.0.0.1" as exception in Trusted Networks. **Setup, Settings, SECURITY tab**.
+### Account Requirements
+- **MG iSmart account** with valid credentials
+- **Vehicle registered** in the MG iSmart mobile app
+- **Region selection**: Europe (eu) or Australia/New Zealand (au)
 
-<img width="418" height="82" alt="image" src="https://github.com/user-attachments/assets/2b2fac4b-f65e-4390-ba96-8dced224afbb" />
+## 🚀 Installation
 
+### 1. Download Plugin
+```bash
+cd /home/pi/domoticz/plugins
+git clone https://github.com/lemassykoi/Domoticz-MG-Plugin.git
+```
 
-### iSMART Account Recommendation
+### 2. Install Dependencies
+`saic-ismart-client-ng`
 
-**IMPORTANT**: If you are currently using the same account credentials in the official MG iSMART mobile app, you should create a dedicated secondary account for this plugin to avoid authentication conflicts. Using the same account simultaneously in both the app and the plugin will cause the mobile app to repeatedly request re-authentication.
+### 3. Configure Plugin
+1. Go to **Setup** → **Hardware** in Domoticz
+2. Add new hardware of type **SAIC iSmart (MG Cars)**
+3. Configure the following parameters:
 
-**How to create a secondary account:**
-1. Create a new MG iSMART account using a different email address
-2. From your primary account, go to Settings → Secondary Account
-3. Invite the newly created secondary account
-4. Use the secondary account credentials in this plugin
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| **Username** | MG iSmart email address | *Required* |
+| **Password** | MG iSmart password | *Required* |
+| **Region** | Europe (eu) or Australia/NZ (au) | eu |
+| **Update Interval** | Data refresh interval in seconds | 180 |
+| **Home Radius** | GPS radius for home detection (meters) | 25 |
+| **Domoticz Port** | Local Domoticz port for notifications | 8080 |
+| **Night Start Hour** | The Hour only (not minutes) for starting period | 22 |
+| **Night End Hour** | The Hour only (not minutes) for ending period | 7 |
+| **Debug Level** | Normal, Debug, or Verbose | Normal |
 
-**Note**: There's no need to associate the vehicle with the secondary account - it will inherit access through the invitation from your primary account.
+### 4. Enable Hardware
+Click **Add** to enable the plugin. The plugin will:
+- Authenticate with MG iSmart API
+- Discover your vehicle(s)
+- Create 36+ devices automatically
+- Create a room plan for organization
 
-## Devices Created
+## 🎛️ Device Overview
 
-The plugin automatically creates these devices and organizes them in a `MG-XXXX` room plan:
+The plugin creates **36+ devices** organized by category:
 
-### Battery & Charging
-1. **Battery Level** - Current State of Charge (%)
-2. **Range** - Current driving range (km)  
-3. **Charging Status** - Charging indicator (On/Off)
-4. **Charging Power** - 3-phase AC charging power (W)
-5. **Real-time Power** - Current power consumption (W)
-6. **Power Usage Today** - Daily energy consumption (Wh)
-7. **Time to Full** - Charging time remaining (minutes)
-8. **Max Range** - Maximum range when fully charged (km)
-9. **Cable Connected** - Charging cable status (On/Off)
+### Core Status (6 devices)
+- Battery Level, Range, Charging Status, Location, Lock Status, Engine Status
 
-### Vehicle Control
-10. **Lock Control** - Lock/unlock vehicle
-11. **Climate Active** - HVAC control (On/Off)
-12. **Start/Stop Charging** - Charging control (On/Off)
-13. **Set Charge Limit** - Target SoC (40-100% in 10% steps)
-14. **Charge Current Limit** - Current limit (6A, 8A, 16A, MAX)
-15. **Heated Seat Left/Right** - Individual seat heating (Off/Low/Medium/High)
+### Controls (4 devices)  
+- Climate Control, Charging Start/Stop, Charge Limit Selector, Lock Control
 
-### Status & Monitoring
-16. **Location** - GPS coordinates
-17. **Address** - Reverse geocoded address (shows "Home" when at home location)
-18. **Speed** - Current vehicle speed (km/h)
-19. **Lock Status** - Vehicle lock status (read-only)
-20. **Odometer** - Vehicle mileage counter
-21. **12V Battery** - Auxiliary battery voltage
-22. **Tyre Pressure FL/FR/RL/RR** - Individual wheel pressures (Bar)
-23. **Car at Home** - Indicates if vehicle is within home radius
+### Sensors (12 devices)
+- 4x Tire Pressure, 2x Temperature, Speed, 12V Battery, Hand Brake, etc.
 
-## Commands
+### Advanced (14+ devices)
+- Heated Seats, Power Monitoring, Address, Home Detection, etc.
 
-Vehicle commands can be sent through device switches:
-- **Lock/Unlock** vehicle via Lock Control device
-- **Start/Stop climate** via Climate Active device  
-- **Start/Stop charging** via Start/Stop Charging device
-- **Set charge limit** via Set Charge Limit selector (40-100%)
-- **Heated seat control** via individual seat devices (4 heat levels)
+## 🔧 Configuration Tips
 
-## Important Notes
+### Debug Levels
+- **Normal**: Essential logs only
+- **Debug**: Detailed operation logs  
+- **Verbose**: Full debugging including API responses
 
-### Sleep Mode & Polling
-- **Default**: 180 seconds (3 minutes) - may prevent car sleep
-- **Recommended**: 300+ seconds (5+ minutes) for production use
-- **Sleep Detection**: Plugin monitors for invalid data patterns and adapts during charging
-- **Charging Compatibility**: Continues monitoring charging status even when extendedData1=-128
-- **Battery Impact**: Frequent polling prevents 12V battery conservation
+### Home Detection
+- Set **Home Radius** to appropriate distance (default 25m)
+- Plugin uses GPS coordinates to determine home/away status
+- Requires Domoticz location to be configured
 
-### Power Monitoring
-- **Charging Power**: Calculated using 3-phase AC formula (11kW capability)
-- **Real-time Power**: Shows current consumption/generation
-- **Energy Counters**: Track daily usage patterns
+### Update Interval
+- **180 seconds** (default) - Good balance of data freshness and API usage
+- **300+ seconds** - Conservative usage for occasional monitoring
+- **60-120 seconds** - Frequent updates (may impact battery if car is awake)
 
-### Data Validation
-- Ignores unrealistic sensor values (-128, 1023, 2047 sentinel values)
-- Only updates devices when receiving valid data
-- Continues operation even if partial data fails
+#### 🌙 Night Cooldown Mode (v1.6.8+)
+The plugin automatically reduces polling frequency during nighttime hours (22:30-06:30) when the car is detected at home:
+- **Night + At Home**: Polls every 1 hour to preserve 12V battery
+- **Night + Away**: Uses normal interval for security monitoring
+- **Daytime**: Always uses configured interval regardless of location
 
-## Technical Details
-
-- Direct SAIC API communication (no MQTT required)
-- Fresh API connections for reliability
-- Proper Domoticz threading compliance
-- Automatic room plan organization
-- Home detection using Domoticz's configured location
-- Smart tire pressure conversion (handles different API units)
-- Based on: https://github.com/SAIC-iSmart-API
-
-## Troubleshooting
+## 🛠️ Troubleshooting
 
 ### Common Issues
-- **Authentication**: Verify credentials work in official MG app
-- **Region Selection**: Ensure correct region (EU/AU/Auto)
-- **API Errors**: Check logs for 500 errors or rate limiting
-- **Sleep Mode**: Consider longer polling intervals if car shows invalid data
-- **Charging Power**: If empty, restart Domoticz after device creation (EnergyMeterMode fix applied)
 
-### Debug Logging
-Enable Debug or Verbose mode to see:
-- Raw API responses
-- Data validation details
-- Sleep mode detection
-- Power calculations
+#### Authentication Problems
+```
+Error: Authentication failed
+```
+- Verify MG iSmart credentials are correct
+- Check region setting (Europe vs Australia/NZ)
+- Ensure vehicle is registered in MG iSmart app
 
+#### Missing Devices
+```
+Error: No vehicles found
+```
+- Confirm vehicle is properly registered
+- Try different region setting
+- Check debug logs for API errors
 
-## Preview
+#### Connection Issues  
+```
+Error: SAIC API error: 500
+```
+- Check internet connection
+- Verify MG iSmart service is operational
+- Enable Debug logging for detailed error info
 
-<img src="MG_plugin_screenshot.png">
+### Debug Process
+1. Set **Debug Level** to "Debug" or "Verbose"
+2. Restart Domoticz: `sudo systemctl restart domoticz`
+3. Check logs: `sudo journalctl -u domoticz -f`
+4. Look for plugin startup and authentication messages
+
+## 🔐 Security & Privacy
+
+### Data Protection
+- **VIN numbers** are hashed in logs for privacy
+- **Passwords** are securely stored by Domoticz
+- **API tokens** are encrypted with AES-256-GCM using credentials-derived keys and stored in `saic_token.json`
+- **Token encryption** prevents token theft - files are useless without matching email/password
+
+### Network Access
+- **MG iSmart API**: Official SAIC/MG servers only
+- **OpenStreetMap**: For reverse geocoding (address lookup)
+- **Local Domoticz API**: For notifications and room plans
+
+## 📊 Technical Details
+
+### Architecture
+- **Threading**: Dedicated asyncio thread for API operations
+- **Token Management**: Persistent authentication with automatic renewal
+- **Sleep Detection**: Intelligent handling of vehicle sleep modes
+- **Error Handling**: Retry mechanisms with exponential backoff
+
+### API Efficiency
+- **Login Frequency**: Once every ~4 months (when token expires)
+- **Token Storage**: Persistent disk storage prevents re-login after plugin restarts
+- **Data Caching**: Efficient API usage with proper token reuse
+- **Sleep Awareness**: Reduced API calls when vehicle is sleeping
+
+## 🤝 Contributing
+
+### Development Setup
+1. Fork the repository
+2. Create a feature branch
+3. Test with your vehicle
+4. Submit a pull request
+
+### Issue Reporting
+Please include:
+- Domoticz version
+- Python version
+- Vehicle model and year
+- Debug logs (with VIN redacted)
+- Steps to reproduce
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- **SAIC iSmart API Client**: Based on the excellent `saic-ismart-client-ng` library
+- **Domoticz Community**: For the robust plugin framework
+- **MG Owners**: For testing and feedback
+
+---
+
+**Version**: 1.6.8  
+**Author**: lemassykoi  
+**Repository**: https://github.com/lemassykoi/Domoticz-MG-Plugin
