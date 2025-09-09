@@ -24,8 +24,8 @@
         <param field="Mode4" label="Home Radius (meters)" width="80px" default="25" required="false"/>
         <param field="Mode3" label="Update Interval (seconds)" width="50px" default="180"/>
         <param field="Port" label="Domoticz Port" width="50px" default="80" required="true"/>
-        <param field="Mode2" label="Cool Down Start Hour" width="50px" default="22">
-        <param field="Mode5" label="Cool Down End Hour" width="50px" default="7">
+        <param field="Mode2" label="Cool Down Start Hour" width="50px" default="22"/>
+        <param field="Mode5" label="Cool Down End Hour" width="50px" default="7"/>
         <param field="Mode6" label="Debug Level" width="100px">
             <options>
                 <option label="Normal" value="Normal" default="true"/>
