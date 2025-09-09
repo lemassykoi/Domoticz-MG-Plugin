@@ -844,11 +844,11 @@ class SAICiSmartPlugin:
             11: {"Name": f"{vehicle_name} Cable Connected",       "Type": 244, "Subtype": 73},
             12: {"Name": f"{vehicle_name} Odometer",              "Type": 113, "Subtype": 0,  "Switchtype": 3},
             14: {"Name": f"{vehicle_name} Max Range",             "Type": 243, "Subtype": 31, "Options": {'Custom': '1;km'}, "Used": 0},
-            15: {"Name": f"{vehicle_name} Charging",              "Type": 248, "Subtype": 1,  "Options": {"EnergyMeterMode": "1"}},
+            15: {"Name": f"{vehicle_name} Charging",              "Type": 243, "Subtype": 29, "Switchtype": 0},
             16: {"Name": f"{vehicle_name} Battery Cap.",          "Type": 243, "Subtype": 31, "Options": {'Custom': '1;kWh'}},
             17: {"Name": f"{vehicle_name} Address",               "TypeName": "Text"},
             18: {"Name": f"{vehicle_name} Speed",                 "Type": 243, "Subtype": 31, "Options": {'Custom': '1;km/h'}},
-            19: {"Name": f"{vehicle_name} Power Usage",           "Type": 113, "Subtype": 0,  "Switchtype": 0, "Options": {"ValueQuantity": "Custom", "ValueUnits": "Wh"}},
+            19: {"Name": f"{vehicle_name} Power Usage",           "Type": 243, "Subtype": 29, "Switchtype": 0},
             20: {"Name": f"{vehicle_name} Heated Seat Left",      "TypeName": "Selector Switch", "Options": {"LevelActions": "||||", "LevelNames": "Off|Low|Medium|High", "LevelOffHidden": "false", "SelectorStyle": "0"}},
             21: {"Name": f"{vehicle_name} Heated Seat Right",     "TypeName": "Selector Switch", "Options": {"LevelActions": "||||", "LevelNames": "Off|Low|Medium|High", "LevelOffHidden": "false", "SelectorStyle": "0"}},
             22: {"Name": f"{vehicle_name} 12V Battery",           "Type": 243, "Subtype": 8},
@@ -1148,7 +1148,7 @@ class SAICiSmartPlugin:
                 # Power Usage Today
                 if 19 in Devices and hasattr(charging_status.rvsChargeStatus, 'powerUsageOfDay'):
                     power_wh = charging_status.rvsChargeStatus.powerUsageOfDay
-                    Devices[19].Update(nValue=0, sValue=str(power_wh))
+                    Devices[19].Update(nValue=0, sValue=f"0;{power_wh}", Options={'EnergyMeterMode': '1'})
                     Domoticz.Debug(f"Power Usage Today: {power_wh} Wh")
 
                 # Time to Full
