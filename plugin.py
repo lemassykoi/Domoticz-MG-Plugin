@@ -842,7 +842,7 @@ class SAICiSmartPlugin:
             9: {"Name": f"{vehicle_name} Charge Current Limit",   "TypeName": "Selector Switch", "Options": {"LevelActions": "|||||", "LevelNames": "Off|6A|8A|16A|MAX", "LevelOffHidden": "true", "SelectorStyle": "0"}},
             10: {"Name": f"{vehicle_name} Lock Control",          "Type": 244, "Subtype": 73},
             11: {"Name": f"{vehicle_name} Cable Connected",       "Type": 244, "Subtype": 73},
-            12: {"Name": f"{vehicle_name} Odometer",              "Type": 113, "Subtype": 0,  "Switchtype": 3},
+            12: {"Name": f"{vehicle_name} Odometer",              "Type": 113, "Subtype": 0,  "Switchtype": 3, "Options": {"ValueQuantity": "Custom", "ValueUnits": "km"}},
             14: {"Name": f"{vehicle_name} Max Range",             "Type": 243, "Subtype": 31, "Options": {'Custom': '1;km'}, "Used": 0},
             15: {"Name": f"{vehicle_name} Charging",              "Type": 243, "Subtype": 29, "Switchtype": 0},
             16: {"Name": f"{vehicle_name} Battery Cap.",          "Type": 243, "Subtype": 31, "Options": {'Custom': '1;kWh'}},
